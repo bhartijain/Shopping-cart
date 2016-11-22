@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+  <script src="lib/require.js" data-main="config.js"></script>
+ 
+</head>
+<body>
+	<div id = "container" >
+	</div>
+</body>
+<script id="main-layout" type="text/html">
+  <div id="header-region" ></div>
+  <div id="body-region"></div>
+</script>
+
+<script type = "text/x-handlebars-template" id = "start-template">
+	<div>
+		<button class = "btn btn-primary" id = "startBtn"> Start </button>
+	</div>
+</script>
+
+<script type = "text/x-handlebars-template" id = "header-template">
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <button type = "btn btn-primary" id = "homeBtn" class = "navbar-brand"><span class="glyphicon glyphicon-home"></span></button>
+	    </div>
+	  
+	    <ul class="nav navbar-nav navbar-right">
+	      <li><div id = "time"></div></li>
+	    </ul>
+	  </div>
+	</nav>
+</script>
+</html>
