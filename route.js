@@ -1,10 +1,14 @@
 /*globals define */
 define([
     'exports',
-    'backbone'
+    'backbone',
+    'view/startView',
+    'view/mainLayout'
 ], function (
     exports,
-    Backbone
+    Backbone,
+    Start,
+    Mainlayout
 ) {
     'use strict';
     exports.Router = Backbone.Router.extend({
@@ -13,6 +17,7 @@ define([
         },
 
         start: function () {
+            Mainlayout.layout.showChildView('header', new Start.StartView());
             console.log('in route');
         }
     });
