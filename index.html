@@ -1,16 +1,95 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-
-  <script src="lib/require.js" data-main="config.js"></script>
- 
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="lib/require.js" data-main="config.js"></script>
 </head>
 <body>
-	<div id = "container" >
-	hello
-	</div>
+    <div id = "container" >
+    </div>
 </body>
+<script id="main-layout" type="text/html">
+    <div id="header-region" ></div>
+    <div id="body-region"></div>
+</script>
 
+<script type = "text/x-handlebars-template" id = "start-template">
+    <div>
+        <button class = "btn btn-primary" id = "startBtn"> Start </button>
+    </div>
+</script>
 
+<script type = "text/x-handlebars-template" id = "header-template">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+            <button type = "btn btn-primary" id = "homeBtn" class = "navbar-brand"><span class="glyphicon glyphicon-home"></span></button>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+            <li><div id = "time"></div></li>
+            </ul>
+        </div>
+    </nav>
+</script>
+
+<script type = "text/x-handlebars-template" id = "home-template">
+    <div>
+        <table class = "table">
+            <tr>
+                <thead>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th> Cost </th>
+                </thead>
+            </tr>
+            <tbody>
+                <tr>
+                    <td class="product" id = {{id}}>{{product}}</td>
+                    <td>{{quantity}}</td>
+                    <td>{{cost}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</script>
+
+<script type = "text/x-handlebars-template" id = "productDetail-template">
+<div>
+{{product}}
+<br>
+Rs.{{cost}}
+<br>
+Qty {{quantity}}
+
+<button type = "btn"  class = "addToCart" id = {{id}}>Add to Cart </button>
+<br>
+Specification
+<br>
+<textarea readonly>{{specification}}</textarea>
+</div>
+</script>
+
+<script type = "text/x-handlebars-template" id = "cartItem-template">
+    <div>
+        <table class = "table">
+            <tr>
+                <thead>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th> Price </th>
+                </thead>
+            </tr>
+            <tbody>
+                <tr>
+                    <td >{{product}}</td>
+                    <td>{{quantity}}</td>
+                    <td>{{cost}}</td>
+                    <td>
+                    <span class = "removeCartItem glyphicon glyphicon-remove-sign" id = {{id}}></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</script>
 </html>
