@@ -32,25 +32,21 @@
     </nav>
 </script>
 
-<script type = "text/x-handlebars-template" id = "home-template">
-    <div>
-        <table class = "table">
-            <tr>
-                <thead>
-                    <th>Product</th>
-                    <th>Quantity</th>
-                    <th> Cost </th>
-                </thead>
-            </tr>
-            <tbody>
-                <tr>
-                    <td class="product" id = {{id}}>{{product}}</td>
-                    <td>{{quantity}}</td>
-                    <td>{{cost}}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+<script id="productTable-template" type="x-handlebars-template">
+    <thead>
+          <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Cost</th>
+          </tr>
+    </thead>
+    <tbody></tbody>
+</script>
+
+<script id="productRow-template" type="x-handlebars-template">
+    <td class="product" id = {{id}}>{{product}}</td>
+    <td>{{quantity}}</td>
+    <td>{{cost}}</td>
 </script>
 
 <script type = "text/x-handlebars-template" id = "productDetail-template">
@@ -69,27 +65,23 @@ Specification
 </div>
 </script>
 
-<script type = "text/x-handlebars-template" id = "cartItem-template">
-    <div>
-        <table class = "table">
-            <tr>
-                <thead>
-                    <th>Item</th>
-                    <th>Quantity</th>
-                    <th> Price </th>
-                </thead>
-            </tr>
-            <tbody>
-                <tr>
-                    <td >{{product}}</td>
-                    <td>{{quantity}}</td>
-                    <td>{{cost}}</td>
-                    <td>
-                    <span class = "removeCartItem glyphicon glyphicon-remove-sign" id = {{id}}></span>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+<script id="cartTable-template" type="x-handlebars-template">
+    <thead>
+          <tr>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Price</th>
+          </tr>
+    </thead>
+    <tbody></tbody>
+</script>
+
+<script id="cartItem-template" type="x-handlebars-template">
+    <td>{{product}}</td>
+    <td>{{quantity}}</td>
+    <td>{{cost}}</td>
+    <td>
+        <span class = "removeCartItem glyphicon glyphicon-remove-sign" id = {{id}}></span>
+    </td>
 </script>
 </html>
