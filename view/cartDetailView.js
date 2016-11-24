@@ -3,12 +3,14 @@ define([
     'jquery',
     'exports',
     'marionette',
-    'handlebar'
+    'handlebar',
+    '../collection/productsCollection'
 ], function (
     $,
     exports,
     Marionette,
-    Handlebar
+    Handlebar,
+    ProductsCollection
 ) {
     'use strict';
     var CartChildView = Marionette.View.extend({
@@ -19,9 +21,8 @@ define([
             var theCompiledTemplate = theTemplate(this.model.attributes);
             $(this.el).html(theCompiledTemplate);
         },
-
-        events: {
-            'click .removeCartItem': 'removeCartItem'
+        triggers: {
+            'click .removeCartItem': 'remove:cart:item'
         },
 
         removeCartItem: function (e) {
@@ -31,8 +32,18 @@ define([
     });
 
     var CartCollectionView = Marionette.CollectionView.extend({
+        initialize: function () {
+            this.listenTo(this.model, 'click', this.render);
+        },
         childView: CartChildView,
-        tagName: 'tbody'
+        tagName: 'tbody',
+        childViewEvents: {
+            'remove:cart:item': 'removeCartItem'
+        },
+        removeCartItem: function (childView) {
+            ProductsCollection.allProducts.add(childView.model);
+            this.removeChildView(childView);
+        }
     });
 
     exports.CartView = Marionette.View.extend({
