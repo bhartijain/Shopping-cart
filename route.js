@@ -6,6 +6,7 @@ define([
     'view/mainLayout',
     'view/homeView',
     'view/headerView',
+    'view/productDetailView',
     'model/productModel',
     'collection/productsCollection'
 ], function (
@@ -15,6 +16,7 @@ define([
     Mainlayout,
     Home,
     Header,
+    ProductDetail,
     ProductModel,
     ProductsCollection
 ) {
@@ -22,7 +24,8 @@ define([
     exports.Router = Backbone.Router.extend({
         routes: {
             "": "start",
-            home: "home"
+            home: "home",
+            "productDetail/:id": "productDetail"
         },
         start: function () {
             Mainlayout.layout.showChildView('body', new Start.StartView());
@@ -33,6 +36,14 @@ define([
             bodyRegion.empty();
             Mainlayout.layout.showChildView('header', new Header.HeaderView());
             Mainlayout.layout.showChildView('body', new Home.HomeCollectionView({model: new ProductModel.Product(), collection: ProductsCollection.allProducts}));
+        },
+        productDetail: function (id) {
+            var model = new ProductModel.Product();
+            var collection = ProductsCollection.allProducts;
+            model.set(collection.get(id).toJSON());
+            var bodyRegion = Mainlayout.layout.getRegion('body');
+            bodyRegion.empty();
+            Mainlayout.layout.showChildView('body', new ProductDetail.ProductDetailView({model: model}));
         }
     });
 
