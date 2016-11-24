@@ -11,6 +11,7 @@
 <script id="main-layout" type="text/html">
     <div id="header-region" ></div>
     <div id="body-region"></div>
+    <div id="footer-region"></div>
 </script>
 
 <script type = "text/x-handlebars-template" id = "start-template">
@@ -76,12 +77,22 @@ Specification
     <tbody></tbody>
 </script>
 
+
 <script id="cartItem-template" type="x-handlebars-template">
     <td>{{product}}</td>
-    <td>{{quantity}}</td>
+    <td><input type = "text" value = {{quantity}}  class = "itemQuantityChange" id = {{quantity}}></td>
     <td>{{cost}}</td>
     <td>
         <span class = "removeCartItem glyphicon glyphicon-remove-sign" id = {{id}}></span>
     </td>
+</script>
+
+<script id="cartFooter-template" type="x-handlebars-template">
+   <div><p>Total cost: {{totalCost}}</p></div>
+   <br>
+   <div>
+        <button>Countinue Shopping</button>
+        <button>Buy Now</button>
+    </div>
 </script>
 </html>

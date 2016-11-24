@@ -4,37 +4,49 @@ define([
     'exports',
     'marionette',
     'handlebar',
+    'view/mainLayout',
     '../collection/productsCollection'
 ], function (
     $,
     exports,
     Marionette,
     Handlebar,
+    Mainlayout,
     ProductsCollection
 ) {
     'use strict';
+    var cost = 0;
+    var totalCost = 0;
     var CartChildView = Marionette.View.extend({
+        initialize: function () {
+            cost = this.model.attributes.cost;
+        },
         tagName: 'tr',
         render: function () {
             var theTemplateScript = $("#cartItem-template").html();
             var theTemplate = Handlebar.compile(theTemplateScript);
             var theCompiledTemplate = theTemplate(this.model.attributes);
             $(this.el).html(theCompiledTemplate);
+             totalCost = cost * quantity;
+        },
+        events: {
+            'focusout .itemQuantityChange': 'itemQuantityChange'
         },
         triggers: {
             'click .removeCartItem': 'remove:cart:item'
         },
 
-        removeCartItem: function (e) {
-            var id = e.target.id;
-            id = parseInt(id);
+        itemQuantityChange: function (e) {
+            var quantity = $(e.target).val();
+            if (quantity) {
+                this.model.attributes.quantity = quantity;
+                this.model.attributes.cost = cost * quantity;
+            }
+            this.render();
         }
     });
 
     var CartCollectionView = Marionette.CollectionView.extend({
-        initialize: function () {
-            this.listenTo(this.model, 'click', this.render);
-        },
         childView: CartChildView,
         tagName: 'tbody',
         childViewEvents: {
@@ -43,6 +55,15 @@ define([
         removeCartItem: function (childView) {
             ProductsCollection.allProducts.add(childView.model);
             this.removeChildView(childView);
+        }
+    });
+
+    var CartFooterView = Marionette.View.extend({
+        render: function () {
+            var theTemplateScript = $("#cartFooter-template").html();
+            var theTemplate = Handlebar.compile(theTemplateScript);
+            var theCompiledTemplate = theTemplate();
+            $(this.el).html(theCompiledTemplate);
         }
     });
 
@@ -56,8 +77,9 @@ define([
                 replaceElement: true
             }
         },
-        onRender() {
+        onRender: function () {
             this.showChildView('body', new CartCollectionView({collection: this.collection, model: this.model}));
+            Mainlayout.layout.showChildView('footer', new CartFooterView());
         }
     });
 });

@@ -41,11 +41,15 @@ define([
         home: function () {
             var bodyRegion = Mainlayout.layout.getRegion('body');
             bodyRegion.empty();
+            var footerRegion = Mainlayout.layout.getRegion('footer');
+            footerRegion.empty();
             Mainlayout.layout.showChildView('header', new Header.HeaderView());
             Mainlayout.layout.showChildView('body', new Home.HomeView({model: new ProductModel.Product(), collection: ProductsCollection.allProducts}));
         },
 
         productDetail: function (id) {
+            var footerRegion = Mainlayout.layout.getRegion('footer');
+            footerRegion.empty();
             var model = new ProductModel.Product();
             var collection = ProductsCollection.allProducts;
             model.set(collection.get(id).toJSON());

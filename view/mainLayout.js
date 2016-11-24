@@ -12,7 +12,8 @@ define([
         template: '#main-layout',
         regions: {
             header: "#header-region",
-            body: "#body-region"
+            body: "#body-region",
+            footer: "#footer-region"
         }
     });
     exports.layout = new MainLayout();
