@@ -60,7 +60,7 @@ define([
 
         cart: function (id) {
             var data = ProductsCollection.allProducts.get(id).toJSON();
-            var model = new CartItemModel.CartItem({id: data.id, product: data.product, cost: data.cost, quantity: data.quantity});
+            var model = new CartItemModel.CartItem({id: data.id, product: data.product, cost: data.cost, quantity: data.quantity, finalCost: data.cost, finalQuantity: data.quantity});
             CartItemCollection.allCartItems.add(model);
             var collection = CartItemCollection.allCartItems;
             ProductsCollection.allProducts.remove(data);

@@ -12,7 +12,9 @@ define([
             id: '',
             product: '',
             cost: '',
-            quantity: ''
+            quantity: '',
+            finalCost:'',
+            finalQuantity:''
         }
     });
 });

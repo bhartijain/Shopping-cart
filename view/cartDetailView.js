@@ -16,18 +16,17 @@ define([
 ) {
     'use strict';
     var cost = 0;
-    var totalCost = 0;
     var CartChildView = Marionette.View.extend({
         initialize: function () {
             cost = this.model.attributes.cost;
         },
         tagName: 'tr',
         render: function () {
+            var data = this.model.attributes;
             var theTemplateScript = $("#cartItem-template").html();
             var theTemplate = Handlebar.compile(theTemplateScript);
-            var theCompiledTemplate = theTemplate(this.model.attributes);
+            var theCompiledTemplate = theTemplate(data);
             $(this.el).html(theCompiledTemplate);
-             totalCost = cost * quantity;
         },
         events: {
             'focusout .itemQuantityChange': 'itemQuantityChange'
@@ -39,8 +38,8 @@ define([
         itemQuantityChange: function (e) {
             var quantity = $(e.target).val();
             if (quantity) {
-                this.model.attributes.quantity = quantity;
-                this.model.attributes.cost = cost * quantity;
+                this.model.attributes.finalQuantity = quantity;
+                this.model.attributes.finalCost = cost * quantity;
             }
             this.render();
         }
@@ -53,6 +52,8 @@ define([
             'remove:cart:item': 'removeCartItem'
         },
         removeCartItem: function (childView) {
+            childView.model.attributes.finalCost= childView.model.attributes.cost;
+            childView.model.attributes.finalQuantity= childView.model.attributes.quantity;
             ProductsCollection.allProducts.add(childView.model);
             this.removeChildView(childView);
         }
