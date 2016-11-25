@@ -80,7 +80,7 @@ Specification
 
 <script id="cartItem-template" type="x-handlebars-template">
     <td>{{product}}</td>
-    <td><input type = "text" value = {{finalQuantity}}  class = "itemQuantityChange" id = {{finalQuantity}}></td>
+    <td><input type = "number" value = {{finalQuantity}}  class = "itemQuantityChange" id = {{finalQuantity}}></td>
     <td>{{finalCost}}</td>
     <td>
         <span class = "removeCartItem glyphicon glyphicon-remove-sign" id = {{id}}></span>
@@ -92,7 +92,60 @@ Specification
    <br>
    <div>
         <button>Countinue Shopping</button>
-        <button>Buy Now</button>
+        <button id = "buyNow">Buy Now</button>
+    </div>
+</script>
+
+<script id = "shipping-template" type = "x-handlebars-template">
+    <div class = "container">
+    
+    <h1>Shipping Details</h1>
+    
+        <div class="row form-group">
+             <label for="username" class="col-sm-1 control-label">Username</label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" id="userName" name="username" />
+                <span id="nameMessage"></span>
+            </div>
+        </div>
+        <div class="row form-group">
+             <label for="phone" class="col-sm-1 control-label">Phone:</label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" id="phone" name="phone" />
+                <span id="phoneMessage"></span>
+            </div>
+        </div>
+
+         <div class="row form-group">
+             <label for="pincode" class="col-sm-1 control-label">Pincode:</label>
+            <div class=" col-sm-5">
+                <input type="text" class="form-control" id="pincode" name="pincode" />
+                <span id="pincodeMessage"></span>
+            </div>
+            <div class="col-sm-1">
+            <button id = "checkPincode">Check</button>
+            </div>
+        </div>
+        <div class="row form-group">
+             <label for="city" class="col-sm-1 control-label">City:</label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" id="city" name="city" readOnly/>
+                <span id="cityMessage"></span>
+            </div>
+        </div>
+
+        <div class="row form-group">
+             <label for="address" class="col-sm-1 control-label">Address:</label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" id="address" name="address" readOnly/>
+                <span id="addressMessage"></span>
+            </div>
+        </div>      
+        
+        <div class="row form-group">
+            <button class="col-sm-1 btn btn-primary" id="submitUserDetail" >Submit</button>
+        </div>
+    
     </div>
 </script>
 </html>

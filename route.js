@@ -8,6 +8,7 @@ define([
     'view/headerView',
     'view/productDetailView',
     'view/cartDetailView',
+    'view/shippingView',
     'model/productModel',
     'model/cartItemModel',
     'collection/productsCollection',
@@ -21,6 +22,7 @@ define([
     Header,
     ProductDetail,
     CartDetail,
+    ShippingDetail,
     ProductModel,
     CartItemModel,
     ProductsCollection,
@@ -32,7 +34,8 @@ define([
             "": "start",
             home: "home",
             "productDetail/:id": "productDetail",
-            "cart/:id": "cart"
+            "cart/:id": "cart",
+            "shippingDetail": "shippingDetail"
         },
         start: function () {
             Mainlayout.layout.showChildView('body', new Start.StartView());
@@ -67,6 +70,15 @@ define([
             var bodyRegion = Mainlayout.layout.getRegion('body');
             bodyRegion.empty();
             Mainlayout.layout.showChildView('body', new CartDetail.CartView({model: model, collection: collection}));
+        },
+
+        shippingDetail: function () {
+            var bodyRegion = Mainlayout.layout.getRegion('body');
+            bodyRegion.empty();
+            var footerRegion = Mainlayout.layout.getRegion('footer');
+            footerRegion.empty();
+            Mainlayout.layout.showChildView('header', new Header.HeaderView());
+            Mainlayout.layout.showChildView('body', new ShippingDetail.ShippingView());
         }
     });
 
