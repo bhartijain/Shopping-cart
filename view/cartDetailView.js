@@ -25,12 +25,12 @@ define([
         },
         tagName: 'tr',
         render: function () {
+            console.log(this);
             var data = this.model.attributes;
             var theTemplateScript = $("#cartItem-template").html();
             var theTemplate = Handlebar.compile(theTemplateScript);
             var theCompiledTemplate = theTemplate(data);
             $(this.el).html(theCompiledTemplate);
-            this.calculateTotal();
         },
         events: {
             'mouseup .itemQuantityChange': 'itemQuantityChange'
@@ -42,20 +42,10 @@ define([
         itemQuantityChange: function (e) {
             var finalQuantity = $(e.target).val();
             if (finalQuantity) {
-                this.model.attributes.finalQuantity = finalQuantity;
                 this.model.attributes.finalCost = cost * finalQuantity;
+                this.model.attributes.finalQuantity = finalQuantity;
             }
             this.render();
-        },
-        calculateTotal: function () {
-            if(this.model.attributes.finalQuantity == 1){
-                totalCost = totalCost + this.model.attributes.cost;
-            };
-            if(this.model.attributes.finalQuantity > 1) {
-                totalCost += (parseInt(this.model.attributes.finalQuantity) - 1) * this.model.attributes.cost;
-            };
-            var cartFooterView = new CartFooterView();
-            cartFooterView.render();
         }
     });
 
