@@ -70,6 +70,7 @@ define([
             childView.model.attributes.finalQuantity= childView.model.attributes.quantity;
             ProductsCollection.allProducts.add(childView.model);
             this.removeChildView(childView);
+            this.collection.remove(childView.model);
         }
     });
 
@@ -85,12 +86,16 @@ define([
         },
 
         events: {
-            'click #buyNow': 'buyNow'
+            'click #buyNow': 'buyNow',
+            'click #continueShopping': 'continueShopping'
         },
 
         buyNow: function () {
             App.router.navigate('shippingDetail', {trigger: true});
 
+        },
+        continueShopping: function () {
+            App.router.navigate('home', {trigger: true});
         }
     });
 
