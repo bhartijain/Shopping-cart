@@ -13,8 +13,8 @@ define([
             product: '',
             cost: '',
             quantity: '',
-            finalCost:'',
-            finalQuantity:''
+            finalCost: '',
+            finalQuantity: ''
         }
     });
 });

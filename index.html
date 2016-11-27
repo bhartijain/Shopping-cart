@@ -5,42 +5,41 @@
     <script src="lib/require.js" data-main="config.js"></script>
 </head>
 <body>
-    <div id = "container" >
+    <div id="container" >
     </div>
 </body>
 <script id="main-layout" type="text/html">
-    <div class = "row col-sm-12">
+    <div class="row col-sm-12">
         <div id="header-region" ></div>
     </div>
-    <div class = "row col-sm-12">
+    <div class="row col-sm-12">
         <div id="body-region"></div>
     </div>
-    <div class = "row col-sm-12">
+    <div class="row col-sm-12">
         <div id="footer-region"></div>
     </div>
 </script>
 
-<script type = "text/x-handlebars-template" id = "start-template">
+<script type="text/x-handlebars-template" id="start-template">
     <div style = "margin: 200px 600px; ">
-        <button class = "btn btn-primary" id = "startBtn"> Start Shopping </button>
+        <button class="btn btn-primary" id="startBtn"> Start Shopping </button>
     </div>
 </script>
 
-<script type = "text/x-handlebars-template" id = "header-template">
+<script type="text/x-handlebars-template" id="header-template">
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
-            <button type = "btn btn-primary" id = "homeBtn" class = "navbar-brand"><span class="glyphicon glyphicon-home"></span></button>
+            <button type="btn btn-primary" id="homeBtn" class="navbar-brand"><span class="glyphicon glyphicon-home"></span></button>
             </div>
             <ul class="nav navbar-nav navbar-right" style="margin-right:50px;">
-            <li>Current Time:<div id = "time"></div></li>
+                <li>Current Time:<div id="time"></div></li>
             </ul>
         </div>
     </nav>
 </script>
 
 <script id="productTable-template" type="x-handlebars-template">
-    
     <thead>
           <tr style="border-top:0px;">
             <th><h3>Product</h3></th>
@@ -49,35 +48,34 @@
           </tr>
     </thead>
     <tbody></tbody>
-    
 </script>
 
 <script id="productRow-template" type="x-handlebars-template">
-    <td class="product"><h4 id = {{id}}>{{product}}</h4></td>
+    <td class="product"><h4 id={{id}}>{{product}}</h4></td>
     <td><h4>{{quantity}} Pc</h4></td>
     <td><h4>Rs. {{cost}}</h4></td>
 </script>
 
-<script type = "text/x-handlebars-template" id = "productDetail-template">
-<div class = "container">
-    <div class="form-group">
-        <h3>{{product}}</h3>
-    </div>
-    <div class="form-group">
-        <h3>Rs.{{cost}}</h3>
-    </div>
+<script type="text/x-handlebars-template" id="productDetail-template">
+    <div class="container">
+        <div class="form-group">
+            <h3>{{product}}</h3>
+        </div>
+        <div class="form-group">
+            <h3>Rs.{{cost}}</h3>
+        </div>
 
-    <div class="form-group">
-        <label for="Quantity"><h3>Quantity: {{quantity}}</h3></label>
-        <button class = "btn btn-primary col-sm-offset-2 addToCart"  id = {{id}}>Add to Cart </button>
-    </div>
-    
-    <div class="form-group col-sm-5">
-      <label for="specification"><h3>Specification:</h3></label>
-      <textarea class="form-control" rows="5" readonly>{{specification}}</textarea>
-    </div>
+        <div class="form-group">
+            <label for="Quantity"><h3>Quantity: {{quantity}}</h3></label>
+            <button class="btn btn-primary col-sm-offset-2 addToCart"  id={{id}}>Add to Cart </button>
+        </div>
+        
+        <div class="form-group col-sm-5">
+            <label for="specification"><h3>Specification:</h3></label>
+            <textarea class="form-control" rows="5" readonly>{{specification}}</textarea>
+        </div>
 
-</div>
+    </div>
 </script>
 
 <script id="cartTable-template" type="x-handlebars-template">
@@ -94,15 +92,11 @@
 
 <script id="cartItem-template" type="x-handlebars-template">
     <td><h4>{{product}}</h4></td>
-    
-    <td><h4><input type = "number" value = {{finalQuantity}}  class = "itemQuantityChange" id = {{finalQuantity}}></h4></td>
-    
+    <td><h4><input type="number" value={{finalQuantity}}  class="itemQuantityChange" id={{finalQuantity}} /></h4></td>
     <td><h4>{{finalCost}}<h4></td>
-    
     <td>
-        <span class = "removeCartItem glyphicon glyphicon-remove-sign" id = {{id}}></span>
+        <span class="removeCartItem glyphicon glyphicon-remove-sign" id={{id}}></span>
     </td>
-    
 </script>
 
 <script id="cartFooter-template" type="x-handlebars-template">
@@ -110,13 +104,13 @@
              <label for="address" class="control-label"><h3>Total cost: {{cartTotalCost}}</h3></label>
             <div>
                 <button class="btn btn-primary" id="continueShopping">Countinue Shopping</button>
-                <button class="btn btn-primary" id = "buyNow">Buy Now</button>
+                <button class="btn btn-primary" id="buyNow">Buy Now</button>
             </div>
     </div> 
 </script>
 
-<script id = "shipping-template" type = "x-handlebars-template">
-    <div class = "container">
+<script id="shipping-template" type="x-handlebars-template">
+    <div class="container">
     
     <h1>Shipping Details</h1>
     
@@ -130,7 +124,7 @@
         <div class="row form-group">
              <label for="phone" class="col-sm-1 control-label">Phone:</label>
             <div class="col-sm-5">
-                <input type="number" class="form-control" id="phone" name="phone" />
+                <input type="text" class="form-control" id="phone" name="phone" />
                 <span id="phoneMessage"></span>
             </div>
         </div>
@@ -142,7 +136,7 @@
                 <span id="pincodeMessage"></span>
             </div>
             <div class="col-sm-1">
-            <button id = "checkPincode">Check</button>
+            <button id="checkPincode">Check</button>
             </div>
         </div>
         <div class="row form-group">
@@ -168,7 +162,7 @@
     </div>
 </script>
 
-<script type = "text/x-handlebars-template" id = "end-template">
-   End page
-</script>
+    <script type="text/x-handlebars-template" id="end-template">
+       End page
+    </script>
 </html>

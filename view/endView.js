@@ -3,19 +3,12 @@ define([
     'jquery',
     'exports',
     'marionette',
-    'handlebar',
-    '../app',
-    '../collection/userDetailCollection',
-    '../collection/cartItemCollection'
-
+    'handlebar'
 ], function (
     $,
     exports,
     Marionette,
-    Handlebar,
-    App,
-    UserDetailCollection,
-    CartItemCollection
+    Handlebar
 ) {
     'use strict';
     exports.StartView = Marionette.View.extend({

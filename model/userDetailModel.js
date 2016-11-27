@@ -13,7 +13,7 @@ define([
             phone: '',
             pincode: '',
             city: '',
-            address:''
-        } 
+            address: ''
+        }
     });
 });

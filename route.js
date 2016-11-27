@@ -9,6 +9,7 @@ define([
     'view/productDetailView',
     'view/cartDetailView',
     'view/shippingView',
+    'view/cartFooterView',
     'model/productModel',
     'model/cartItemModel',
     'collection/productsCollection',
@@ -23,6 +24,7 @@ define([
     ProductDetail,
     CartDetail,
     ShippingDetail,
+    CartFooter,
     ProductModel,
     CartItemModel,
     ProductsCollection,
@@ -70,6 +72,7 @@ define([
             var bodyRegion = Mainlayout.layout.getRegion('body');
             bodyRegion.empty();
             Mainlayout.layout.showChildView('body', new CartDetail.CartView({model: model, collection: collection}));
+            Mainlayout.layout.showChildView('footer', new CartFooter.CartFooterView({model: model, collection: collection}));
         },
 
         shippingDetail: function () {
