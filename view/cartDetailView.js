@@ -20,12 +20,8 @@ define([
     var cost = 0, finalCost;
     var totalCost = 0;
     var CartChildView = Marionette.View.extend({
-        initialize: function () {
-            cost = this.model.attributes.cost;
-        },
         tagName: 'tr',
         render: function () {
-            console.log(this);
             var data = this.model.attributes;
             var theTemplateScript = $("#cartItem-template").html();
             var theTemplate = Handlebar.compile(theTemplateScript);
@@ -42,14 +38,18 @@ define([
         itemQuantityChange: function (e) {
             var finalQuantity = $(e.target).val();
             if (finalQuantity) {
-                this.model.attributes.finalCost = cost * finalQuantity;
-                this.model.attributes.finalQuantity = finalQuantity;
+                this.model.attributes.finalCost = this.model.attributes.cost * finalQuantity;
+                this.model.set('finalQuantity', finalQuantity);
             }
             this.render();
         }
     });
 
     var CartCollectionView = Marionette.CollectionView.extend({
+        initialize: function () {
+            this.calculateTotalCost();
+            this.listenTo(this.model, "change", this.calculateTotalCost);
+        },
         childView: CartChildView,
         tagName: 'tbody',
         childViewEvents: {
@@ -61,17 +61,26 @@ define([
             ProductsCollection.allProducts.add(childView.model);
             this.removeChildView(childView);
             this.collection.remove(childView.model);
+        },
+        calculateTotalCost: function () {
+            var data = this.collection.models;
+            totalCost = 0;
+            _.each(this.collection.models, function(object){
+                    totalCost += object.attributes.finalCost;
+            });
+            console.log(totalCost);
+            cartFooterView.render();
         }
+
     });
 
     var CartFooterView = Marionette.View.extend({
-        initialize: function () {
-            finalCost = {totalCost : totalCost};
-        },
         render: function () {
+            finalCost = {cartTotalCost : totalCost};
             var theTemplateScript = $("#cartFooter-template").html();
             var theTemplate = Handlebar.compile(theTemplateScript);
             var theCompiledTemplate = theTemplate(finalCost);
+            console.log(this.$el);
             $(this.el).html(theCompiledTemplate);
         },
 
@@ -88,6 +97,7 @@ define([
             App.router.navigate('home', {trigger: true});
         }
     });
+    var cartFooterView = new CartFooterView();
 
     exports.CartView = Marionette.View.extend({
         tagName: 'table',
