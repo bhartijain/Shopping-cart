@@ -13,7 +13,7 @@ define([
     App
 ) {
     'use strict';
-    var HomeChildView = Marionette.View.extend({
+    var ProductListView = Marionette.View.extend({
         tagName: 'tr',
         render: function () {
             var theTemplateScript = $("#productRow-template").html();
@@ -30,8 +30,8 @@ define([
             App.router.navigate('productDetail/' + id, {trigger: true});
         }
     });
-    var HomeCollectionView = Marionette.CollectionView.extend({
-        childView: HomeChildView,
+    var ProductListCollectionView = Marionette.CollectionView.extend({
+        childView: ProductListView,
         tagName: 'tbody'
     });
 
@@ -46,7 +46,7 @@ define([
             }
         },
         onRender() {
-            this.showChildView('body', new HomeCollectionView({collection: this.collection, model: this.model}));
+            this.showChildView('body', new ProductListCollectionView({collection: this.collection, model: this.model}));
         }
     });
 });

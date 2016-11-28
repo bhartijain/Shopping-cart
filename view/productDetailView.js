@@ -21,12 +21,19 @@ define([
             $(this.el).html(theCompiledTemplate);
         },
         events: {
-            'click .addToCart': 'addToCart'
+            'click .addToCart': 'addToCart',
+            'mouseup .itemQuantityChange': 'itemQuantityChange'
         },
         addToCart: function (e) {
             var id = e.target.id;
             id = parseInt(id);
             App.router.navigate('cart/' + id, {trigger: true});
+        },
+        itemQuantityChange: function (e) {
+            var finalQuantity = $(e.target).val();
+            var id = this.model.attributes.id;
+            var data = this.collection.get(id);
+            data.set('finalQuantity', finalQuantity);
         }
 
     });

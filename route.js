@@ -60,12 +60,12 @@ define([
             model.set(collection.get(id).toJSON());
             var bodyRegion = Mainlayout.layout.getRegion('body');
             bodyRegion.empty();
-            Mainlayout.layout.showChildView('body', new ProductDetail.ProductDetailView({model: model}));
+            Mainlayout.layout.showChildView('body', new ProductDetail.ProductDetailView({model: model, collection: collection}));
         },
 
         cart: function (id) {
             var data = ProductsCollection.allProducts.get(id).toJSON();
-            var model = new CartItemModel.CartItem({id: data.id, product: data.product, cost: data.cost, quantity: data.quantity, finalCost: data.cost, finalQuantity: data.quantity});
+            var model = new CartItemModel.CartItem({id: data.id, product: data.product, cost: data.cost, quantity: data.quantity, finalCost: data.cost, finalQuantity: data.finalQuantity});
             CartItemCollection.allCartItems.add(model);
             var collection = CartItemCollection.allCartItems;
             ProductsCollection.allProducts.remove(data);

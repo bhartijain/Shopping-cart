@@ -66,7 +66,11 @@
         </div>
 
         <div class="form-group">
-            <label for="Quantity"><h3>Quantity: {{quantity}}</h3></label>
+            <label for="Quantity">
+                <h3>Quantity:
+                    <input type="number" value={{quantity}}  class="itemQuantityChange" id={{quantity}} />
+                </h3>
+            </label>
             <button class="btn btn-primary col-sm-offset-2 addToCart"  id={{id}}>Add to Cart </button>
         </div>
         
@@ -92,7 +96,9 @@
 
 <script id="cartItem-template" type="x-handlebars-template">
     <td><h4>{{product}}</h4></td>
-    <td><h4><input type="number" value={{finalQuantity}}  class="itemQuantityChange" id={{finalQuantity}} /></h4></td>
+    <td>
+        <input type="text" value={{finalQuantity}}  class="itemQuantityChange isNumber" id={{finalQuantity}} />
+    </td>
     <td><h4>{{finalCost}}<h4></td>
     <td>
         <span class="removeCartItem glyphicon glyphicon-remove-sign" id={{id}}></span>

@@ -17,16 +17,28 @@ define([
         tagName: 'tr',
         render: function () {
             var data = this.model.attributes;
+            data.finalCost = data.finalQuantity * data.cost;
             var theTemplateScript = $("#cartItem-template").html();
             var theTemplate = Handlebar.compile(theTemplateScript);
             var theCompiledTemplate = theTemplate(data);
             $(this.el).html(theCompiledTemplate);
         },
         events: {
-            'mouseup .itemQuantityChange': 'itemQuantityChange'
+            'keypress .isNumber': 'isNumber',
+            'keyup .itemQuantityChange': 'itemQuantityChange'
+
         },
         triggers: {
             'click .removeCartItem': 'remove:cart:item'
+        },
+
+        isNumber: function (e) {
+            e = (e) ? e : window.event;
+            var charCode = (e.which) ? e.which : e.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+               return false;
+            }
+            return true;
         },
 
         itemQuantityChange: function (e) {
@@ -34,8 +46,8 @@ define([
             if (finalQuantity) {
                 this.model.attributes.finalCost = this.model.attributes.cost * finalQuantity;
                 this.model.set('finalQuantity', finalQuantity);
-            }
-            this.render();
+                this.render();
+            }  
         }
     });
 

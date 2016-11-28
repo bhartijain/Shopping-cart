@@ -18,7 +18,7 @@ define([
     var totalCost = 0;
     exports.CartFooterView = Marionette.View.extend({
         initialize: function () {
-            this.listenTo(this.model, "change", this.render);
+            this.listenTo(this.collection, "change", this.render);
         },
         render: function () {
             this.calculateTotalCost();
@@ -32,7 +32,7 @@ define([
         calculateTotalCost: function () {
             totalCost = 0;
             _.each(this.collection.models, function (object) {
-                totalCost += object.attributes.finalCost;
+                totalCost += object.attributes.cost * object.attributes.finalQuantity;
             });
         },
         events: {

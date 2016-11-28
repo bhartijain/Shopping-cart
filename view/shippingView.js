@@ -5,6 +5,10 @@ define([
     'marionette',
     'handlebar',
     '../model/userDetailModel',
+    '../collection/productsCollection',
+    '../collection/cartItemCollection',
+    '../model/productModel',
+    '../model/cartItemModel',
     '../app'
 ], function (
     $,
@@ -12,6 +16,10 @@ define([
     Marionette,
     Handlebar,
     UserDetailModel,
+    ProductsCollection,
+    CartItemCollection,
+    ProductModel,
+    CartItemModel,
     App
 ) {
     'use strict';
@@ -73,7 +81,12 @@ define([
                 return false;
             }
             if (name && phone && pincode) {
-                App.router.navigate('', {trigger: true});
+                var cartData = CartItemCollection.allCartItems;
+                var productData = ProductsCollection.allProducts;
+                productData.add(cartData.models);
+                CartItemCollection.allCartItems.reset();
+                console.log(CartItemCollection.allCartItems);
+                App.router.navigate('home', {trigger: true});
             }
 
             var userDetail = new UserDetailModel.UserDetail();
